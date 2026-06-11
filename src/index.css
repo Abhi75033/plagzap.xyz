@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --animate-text-reveal: text-reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) 0.5s;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-spotlight: spotlight 2s ease .75s 1 forwards;
+
+  @keyframes text-reveal {
+    0% {
+      transform: translate(0, 100%);
+    }
+
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  @keyframes spotlight {
+    0% {
+      opacity: 0;
+      transform: translate(-72%, -62%) scale(0.5);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -40%) scale(1);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+    --primary: #171717;
+    --primary-foreground: #fafafa;
+    --secondary: #f5f5f5;
+    --secondary-foreground: #171717;
+    --accent: #f5f5f5;
+    --accent-foreground: #171717;
+
+    /* Additional theme-aware colors for light mode */
+    --muted-foreground: #525252;
+    --border: #e5e5e5;
+    --card: #ffffff;
+    --card-foreground: #0a0a0a;
+    --nav-link: #404040;
+    --nav-link-hover: #0a0a0a;
+    --menu-bg: #ffffff;
+    --menu-border: #e5e5e5;
+    --warning-text: #ca8a04;
+    /* yellow-600 for light mode */
+  }
+
+  .dark {
+    --background: #0a0a0a;
+    --foreground: #fafafa;
+    --primary: #fafafa;
+    --primary-foreground: #171717;
+    --secondary: #262626;
+    --secondary-foreground: #fafafa;
+    --accent: #262626;
+    --accent-foreground: #fafafa;
+
+    /* Additional theme-aware colors for dark mode */
+    --muted-foreground: #a3a3a3;
+    --border: rgba(255, 255, 255, 0.1);
+    --card: #0a0a0a;
+    --card-foreground: #fafafa;
+    --nav-link: #d4d4d4;
+    --nav-link-hover: #ffffff;
+    --menu-bg: #0a0a0a;
+    --menu-border: rgba(255, 255, 255, 0.1);
+    --warning-text: #fde047;
+    /* yellow-300 for dark mode */
+  }
+
+  /* Republic Day Special Theme - Tricolor Palette */
+  .republic-day {
+    /* Base colors with tricolor palette - Darker, more elegant theme basis */
+    --background: #0f0f0f;
+    /* Dark background as base for elegance */
+    --foreground: #fafafa;
+
+    /* Primary accent - Saffron */
+    --primary: #FF9933;
+    --primary-foreground: #ffffff;
+
+    /* Secondary accent - India Green */
+    --secondary: #138808;
+    --secondary-foreground: #ffffff;
+
+    /* Tertiary accent - Navy Blue (Ashoka Chakra) */
+    --accent: #000080;
+    --accent-foreground: #ffffff;
+
+    /* Additional theme colors */
+    --muted-foreground: #a3a3a3;
+    --border: rgba(255, 153, 51, 0.15);
+    /* Subtle Saffron border */
+    --card: #171717;
+    --card-foreground: #fafafa;
+
+    /* Nav links */
+    --nav-link: #e5e5e5;
+    --nav-link-hover: #FF9933;
+
+    --menu-bg: #0a0a0a;
+    --menu-border: rgba(255, 153, 51, 0.2);
+    --warning-text: #FF9933;
+
+    /* Special Republic Day accents */
+    --tricolor-gradient: linear-gradient(to right, #FF9933, #ffffff, #138808);
+  }
+
+  /* Republic Day Full Page Background Effect */
+  .republic-day::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(circle at 15% 50%, rgba(255, 153, 51, 0.05) 0%, transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(19, 136, 8, 0.05) 0%, transparent 25%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Republic Day Full Page Styling */
+  .republic-day section {
+    border-color: rgba(255, 153, 51, 0.1);
+  }
+
+  /* Cards with tricolor glow - Subtle */
+  .republic-day .bg-gray-900\/50,
+  .republic-day .bg-gray-900\/30,
+  .republic-day .bg-gray-900\/80,
+  .republic-day .bg-black\/40,
+  .republic-day .bg-white\/5,
+  .republic-day .bg-background\/50 {
+    background: linear-gradient(145deg, rgba(255, 153, 51, 0.05) 0%, rgba(19, 136, 8, 0.03) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-top: 1px solid rgba(255, 153, 51, 0.2) !important;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  /* Gradient buttons - USE BACKGROUND-IMAGE to prevent clipping issues */
+  .republic-day .bg-gradient-to-r:not(.bg-clip-text),
+  .republic-day .from-violet-600:not(.bg-clip-text),
+  .republic-day .from-blue-600:not(.bg-clip-text) {
+    background-image: linear-gradient(to right, #FF9933, #e65100) !important;
+  }
+
+  /* Force background-clip: border-box for buttons to ensure they have background */
+  .republic-day button {
+    background-clip: border-box !important;
+    -webkit-background-clip: border-box !important;
+  }
+
+  .republic-day button:hover {
+    box-shadow: 0 0 15px rgba(255, 153, 51, 0.3);
+  }
+
+  /* Headings with tricolor gradient - ONLY if they act as gradient text */
+  .republic-day .bg-clip-text,
+  .republic-day .text-transparent,
+  .republic-day h2 span.bg-clip-text,
+  .republic-day h1 span.bg-clip-text {
+    background-image: linear-gradient(90deg, #FF9933, #ffffff, #138808) !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+  }
+
+  .republic-day .text-violet-400,
+  .republic-day .text-blue-400,
+  .republic-day .text-emerald-400,
+  .republic-day .text-purple-400 {
+    color: #FF9933 !important;
+    /* Unified accent color */
+  }
+
+  /* Decorative backgrounds (Blobs) - Made very subtle */
+  .republic-day .bg-purple-600\/20 {
+    background: radial-gradient(circle, rgba(255, 153, 51, 0.15) 0%, transparent 70%) !important;
+  }
+
+  .republic-day .bg-blue-600\/20 {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%) !important;
+  }
+
+  .republic-day .bg-violet-600\/20 {
+    background: radial-gradient(circle, rgba(19, 136, 8, 0.15) 0%, transparent 70%) !important;
+  }
+
+  /* Border accents */
+  .republic-day .border-white\/10,
+  .republic-day .border-white\/5 {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+}
+
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Animation delay utilities */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
